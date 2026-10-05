@@ -1,4 +1,4 @@
-﻿Write-Host "VM service account env var: ($env:ENV_VM_SERVICEACCOUNT)"
+Write-Host "VM service account env var: ($env:ENV_VM_SERVICEACCOUNT)"
 Write-Host "SQLite databases location env var: ($env:ENV_DATABASE_FILE_LOCATION)"
 Write-Host "Backup bucket env var: ($env:ENV_BLAISE_BACKUP_BUCKET)"
 
@@ -23,7 +23,7 @@ ForEach ($Result in $DB_FILES) {
     Write-Host "Uploading file to GCS..."
     Write-Host "Source file path: $Result"
     Write-Host "Destination GCS path: gs://$env:ENV_BLAISE_BACKUP_BUCKET/$year/$month/$day/$servertime/"
-    gsutil cp "$Result" "gs://$env:ENV_BLAISE_BACKUP_BUCKET/$year/$month/$day/$servertime/"
+    gcloud storage cp "$Result" "gs://$env:ENV_BLAISE_BACKUP_BUCKET/$year/$month/$day/$servertime/"
 
     Write-Host "Removing temporary file..."
     Remove-Item $Result
